@@ -1,0 +1,120 @@
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #fce4ec; /* Soft pink background */
+  font-family: "Quicksand", sans-serif;
+  overflow: hidden;
+}
+
+#game-container {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+#message-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.message-box {
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  animation: popIn 0.3s ease-out;
+  border: 3px solid #f8bbd0;
+}
+
+#message-text {
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+button {
+  background: #f8bbd0;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 15px;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: bold;
+  transition: transform 0.1s;
+}
+
+button:hover {
+  transform: scale(1.05);
+  background: #f48fb1;
+}
+
+@keyframes popIn {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Title Screen specific styles */
+#title-screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 20;
+  transition: opacity 0.5s ease;
+}
+
+.title-content {
+  text-align: center;
+  color: #880e4f;
+  animation: float 3s ease-in-out infinite;
+}
+
+h1 {
+  font-size: 3rem;
+  margin-bottom: 10px;
+  text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5);
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}

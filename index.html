@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Feliz San Valentin Nº2 ✨</title>
+
+    <!-- Meta -->
+    <meta
+      name="description"
+      content="Un pequeño regalo de San Valentín hecho con amor. Una aventura sobre recuerdos y momentos felices."
+    />
+    <meta name="theme-color" content="#f8c8dc" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="home.css" />
+
+    <!-- Phaser -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/phaser@3.60.0/dist/phaser.min.js"
+      defer
+    ></script>
+    <script src="game.js" defer></script>
+  </head>
+
+  <body>
+    <!-- Background hearts -->
+    <div class="hearts-bg"></div>
+
+    <!-- Game -->
+    <main id="game-wrapper">
+      <div id="game-container"></div>
+    </main>
+
+    <!-- Title Screen -->
+    <section id="title-screen">
+      <div class="title-card">
+        <span class="tag">💝 Para Anita</span>
+        <h1>Feliz San Valentín ✨</h1>
+
+        <p class="subtitle">
+          Hice este pequeño juego<br />
+          para guardar algunos recuerdos<br />
+          que significan mucho para mí 💕
+        </p>
+
+        <button id="start-btn">
+          Comenzar ✨
+        </button>
+
+        <p class="hint">
+          Usa las flechas para moverte 💫
+        </p>
+      </div>
+    </section>
+
+    <!-- Message Overlay -->
+    <section id="message-overlay" class="hidden">
+      <div class="message-box">
+        <p id="message-text"></p>
+        <button id="close-btn">Guardar recuerdo 💖</button>
+      </div>
+    </section>
+  </body>
+</html>
