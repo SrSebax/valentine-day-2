@@ -30,6 +30,7 @@
       src="https://cdn.jsdelivr.net/npm/phaser@3.60.0/dist/phaser.min.js"
       defer
     ></script>
+    <script src="final.js" defer></script>
     <script src="game.js" defer></script>
   </head>
 
@@ -40,6 +41,13 @@
     <!-- Game -->
     <main id="game-wrapper">
       <div id="game-container"></div>
+      
+      <!-- Touch Controls -->
+      <div id="controls">
+        <div class="d-btn" id="btn-left">⬅️</div>
+        <div class="d-btn" id="btn-right">➡️</div>
+        <div class="d-btn" id="btn-up">⬆️ Saltar</div>
+      </div>
     </main>
 
     <!-- Title Screen -->
@@ -59,7 +67,7 @@
         </button>
 
         <p class="hint">
-          Usa las flechas para moverte 💫
+          Salta y llega a la meta 💫
         </p>
       </div>
     </section>

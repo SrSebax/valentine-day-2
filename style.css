@@ -11,9 +11,12 @@ body {
 }
 
 #game-container {
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  border-radius: 15px;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
   overflow: hidden;
+  background-color: #000; /* Letterboxing color */
 }
 
 #message-overlay {
@@ -118,3 +121,63 @@ h1 {
     transform: translateY(0px);
   }
 }
+
+/* Touch Controls */
+#controls {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  width: 200px;
+  height: 100px;
+  display: grid;
+  grid-template-areas:
+    "left jump right";
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  z-index: 100;
+  display: none; /* Hidden by default on desktop */
+}
+
+@media (hover: none) and (pointer: coarse) {
+  #controls {
+    display: grid;
+  }
+}
+
+/* Also show on small screens just in case */
+@media (max-width: 768px) {
+  #controls {
+    display: grid;
+  }
+}
+
+.d-btn {
+  width: 50px;
+  height: 50px;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 15px;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  font-size: 14px;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: none; /* Important to prevent scrolling while playing */
+  cursor: pointer;
+  backdrop-filter: blur(2px);
+  text-align: center;
+  padding: 5px;
+}
+
+.d-btn:active, .d-btn.active {
+  background: rgba(255, 255, 255, 0.8);
+  transform: scale(0.95);
+  color: #ff4081;
+}
+
+#btn-up { grid-area: jump; }
+#btn-left { grid-area: left; }
+#btn-right { grid-area: right; }
+
