@@ -1,97 +1,117 @@
 export class IntroScene extends Phaser.Scene {
-    constructor() {
-        super({ key: 'IntroScene' });
+  constructor() {
+    super({ key: "IntroScene" });
+  }
+
+  preload() {
+    this.load.image("background", "assets/background.png");
+    this.load.audio("music", "assets/music.mp3");
+    this.load.audio("collect", "assets/collect.mp3");
+    this.load.spritesheet("player", "assets/player2.png", {
+      frameWidth: 256,
+      frameHeight: 256,
+    });
+    this.load.spritesheet("items", "assets/items.png", {
+      frameWidth: 512,
+      frameHeight: 512,
+    });
+    this.load.image("spike", "assets/spikes.png");
+    this.load.spritesheet("angel", "assets/angel.png", {
+      frameWidth: 48,
+      frameHeight: 64,
+    });
+  }
+
+  create() {
+    const { width, height } = this.scale;
+
+    // Background
+    this.add.rectangle(width / 2, height / 2, width, height, 0xfff0f5);
+    try {
+      const bg = this.add.image(width / 2, height / 2, "background");
+      const scaleX = width / bg.width;
+      const scaleY = height / bg.height;
+      const scale = Math.max(scaleX, scaleY);
+      bg.setScale(scale).setAlpha(0.5);
+    } catch (e) {}
+
+    // Animations (ensure idle exists)
+    if (!this.anims.exists("idle")) {
+      this.anims.create({
+        key: "idle",
+        frames: this.anims.generateFrameNumbers("player", { start: 0, end: 0 }),
+        frameRate: 1,
+        repeat: -1,
+      });
     }
 
-    preload() {
-        this.load.image('background', 'assets/background.png');
-        this.load.audio('music', 'assets/music.mp3');
-        this.load.audio('collect', 'assets/collect.mp3');
-        this.load.spritesheet('player', 'assets/player2.png', { frameWidth: 256, frameHeight: 256 });
-        this.load.spritesheet('items', 'assets/items.png', { frameWidth: 512, frameHeight: 512 });
-        this.load.image('spike', 'assets/spikes.png');
-        this.load.spritesheet('angel', 'assets/angel.png', { frameWidth: 48, frameHeight: 64 });
-    }
+    // Player Character (Left side)
+    const player = this.add.sprite(width * 0.3, height * 0.6, "player");
+    player.setScale(0.8);
+    player.play("idle");
 
-    create() {
-        const { width, height } = this.scale;
+    // Dialogue Box (Right side)
+    const boxX = width * 0.5;
+    const boxY = height * 0.25;
+    const boxW = width * 0.45;
+    const boxH = height * 0.4;
 
-        // Background
-        this.add.rectangle(width / 2, height / 2, width, height, 0xfff0f5);
-        try {
-            const bg = this.add.image(width / 2, height / 2, 'background');
-            const scaleX = width / bg.width;
-            const scaleY = height / bg.height;
-            const scale = Math.max(scaleX, scaleY);
-            bg.setScale(scale).setAlpha(0.5);
-        } catch (e) {}
+    const graphics = this.add.graphics();
+    graphics.fillStyle(0xffffff, 0.9);
+    graphics.fillRoundedRect(boxX, boxY, boxW, boxH, 20);
+    graphics.lineStyle(4, 0xff69b4, 1);
+    graphics.strokeRoundedRect(boxX, boxY, boxW, boxH, 20);
 
-        // Animations (ensure idle exists)
-        if (!this.anims.exists('idle')) {
-            this.anims.create({
-                key: 'idle',
-                frames: this.anims.generateFrameNumbers('player', { start: 0, end: 0 }),
-                frameRate: 1,
-                repeat: -1
-            });
-        }
+    // Text
+    const textStyle = {
+      fontFamily: "Quicksand",
+      fontSize: "24px",
+      color: "#555",
+      wordWrap: { width: boxW - 40 },
+      align: "center",
+    };
 
-        // Player Character (Left side)
-        const player = this.add.sprite(width * 0.3, height * 0.6, 'player');
-        player.setScale(0.8);
-        player.play('idle');
+    this.add
+      .text(boxX + boxW / 2, boxY + 50, "¡Hola mi amorcito! ❤️", {
+        ...textStyle,
+        fontSize: "32px",
+        color: "#e91e63",
+        fontStyle: "bold",
+      })
+      .setOrigin(0.5);
 
-        // Dialogue Box (Right side)
-        const boxX = width * 0.5;
-        const boxY = height * 0.25;
-        const boxW = width * 0.45;
-        const boxH = height * 0.4;
+    this.add
+      .text(
+        boxX + boxW / 2,
+        boxY + 130,
+        "Espero que disfrutes este mini juego que te hice con mucho amor... 👇",
+        textStyle,
+      )
+      .setOrigin(0.5);
 
-        const graphics = this.add.graphics();
-        graphics.fillStyle(0xffffff, 0.9);
-        graphics.fillRoundedRect(boxX, boxY, boxW, boxH, 20);
-        graphics.lineStyle(4, 0xff69b4, 1);
-        graphics.strokeRoundedRect(boxX, boxY, boxW, boxH, 20);
+    this.add
+      .text(boxX + boxW / 2, boxY + boxH - 50, "(Toca para continuar)", {
+        ...textStyle,
+        fontSize: "18px",
+        color: "#888",
+      })
+      .setOrigin(0.5);
 
-        // Text
-        const textStyle = {
-            fontFamily: 'Quicksand',
-            fontSize: '24px',
-            color: '#555',
-            wordWrap: { width: boxW - 40 },
-            align: 'center'
-        };
+    // Interaction
+    this.input.once("pointerdown", () => this.startGame());
+    this.input.keyboard.once("keydown-SPACE", () => this.startGame());
 
-        this.add.text(boxX + boxW / 2, boxY + 50, "¡Hola mi amorcito! ❤️", {
-            ...textStyle,
-            fontSize: '32px',
-            color: '#e91e63',
-            fontStyle: 'bold'
-        }).setOrigin(0.5);
+    // Start background music at low volume if not already playing
+    try {
+      if (!this.sound.get("music")) {
+        this.sound.play("music", { loop: true, volume: 0.1 });
+      } else if (!this.sound.get("music").isPlaying) {
+        this.sound.get("music").play({ loop: true, volume: 0.1 });
+      }
+    } catch (e) {}
+  }
 
-        this.add.text(boxX + boxW / 2, boxY + 130, 
-            "Espero que disfrutes este mini juego que te hice con mucho amor... 👇", 
-            textStyle
-        ).setOrigin(0.5);
-
-        this.add.text(boxX + boxW / 2, boxY + boxH - 50, 
-            "(Toca para continuar)", 
-            { ...textStyle, fontSize: '18px', color: '#888' }
-        ).setOrigin(0.5);
-
-        // Interaction
-        this.input.once('pointerdown', () => this.startGame());
-        this.input.keyboard.once('keydown-SPACE', () => this.startGame());
-    }
-
-    startGame() {
-        // Start music if proper interaction happened and not playing
-        try {
-            if (!this.sound.get('music') || !this.sound.get('music').isPlaying) {
-                 this.sound.play('music', { loop: true, volume: 0.5 });
-            }
-        } catch (e) {}
-
-        this.scene.start('GameScene');
-    }
+  startGame() {
+    this.scene.start("GameScene");
+  }
 }

@@ -1,5 +1,5 @@
 export const itemMessages = {
-    0: "Una carta antigua llena de amor... 💌",
+    0: "Una carta antigua llena de amorrrr... 💌",
     1: "Una estrella que ilumina el camino... ⭐",
     2: "Una flor que nunca se marchita... 🌸",
     3: "Una foto de un momento feliz... 📸",

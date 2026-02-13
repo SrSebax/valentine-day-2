@@ -142,6 +142,13 @@ h1 {
   margin-bottom: 20px;
 }
 
+#message-image {
+  max-width: 100%;
+  border-radius: 12px;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
 #close-btn {
   background: #ff9bb8;
   border: none;
