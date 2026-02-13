@@ -1,19 +1,20 @@
-import { TitleScene } from '../scenes/TitleScene.js';
-import { IntroScene } from '../scenes/IntroScene.js';
-import { GameScene } from '../scenes/GameScene.js';
-import { FinalScene } from '../scenes/FinalScene.js';
-import { physicsConfig } from './physicsConfig.js';
+import { TitleScene } from "../scenes/TitleScene.js";
+import { IntroScene } from "../scenes/IntroScene.js";
+import { GameScene } from "../scenes/GameScene.js";
+import { FinalScene } from "../scenes/FinalScene.js";
+import { MemoriesScene } from "../scenes/MemoriesScene.js";
+import { physicsConfig } from "./physicsConfig.js";
 
 export const gameConfig = {
-    type: Phaser.AUTO,
-    scale: {
-        mode: Phaser.Scale.RESIZE,
-        autoCenter: Phaser.Scale.CENTER_BOTH,
-        width: '100%',
-        height: '100%'
-    },
-    parent: 'game-container',
-    physics: physicsConfig,
-    backgroundColor: '#fff0f5',
-    scene: [IntroScene, GameScene, FinalScene, TitleScene]
+  type: Phaser.AUTO,
+  scale: {
+    mode: Phaser.Scale.RESIZE,
+    autoCenter: Phaser.Scale.CENTER_BOTH,
+    width: "100%",
+    height: "100%",
+  },
+  parent: "game-container",
+  physics: physicsConfig,
+  backgroundColor: "#fff0f5",
+  scene: [TitleScene, IntroScene, MemoriesScene, GameScene, FinalScene],
 };

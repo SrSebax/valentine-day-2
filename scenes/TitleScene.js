@@ -79,5 +79,26 @@ export class TitleScene extends Phaser.Scene {
         }
       };
     }
+
+    const memoriesBtn = document.getElementById("memories-btn");
+    if (memoriesBtn) {
+      const newMemBtn = memoriesBtn.cloneNode(true);
+      if (memoriesBtn.parentNode) {
+        memoriesBtn.parentNode.replaceChild(newMemBtn, memoriesBtn);
+      }
+
+      newMemBtn.onclick = () => {
+        // HTML transition
+        if (titleScreen) {
+          titleScreen.style.opacity = "0";
+          setTimeout(() => {
+            titleScreen.style.display = "none";
+            this.scene.start("MemoriesScene");
+          }, 500);
+        } else {
+          this.scene.start("MemoriesScene");
+        }
+      };
+    }
   }
 }

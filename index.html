@@ -23,8 +23,7 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="home.css" />
-
+    
     <!-- Phaser -->
     <script
       src="https://cdn.jsdelivr.net/npm/phaser@3.60.0/dist/phaser.min.js"
@@ -34,50 +33,59 @@
   </head>
 
   <body>
-    <!-- Background hearts -->
-    <div class="hearts-bg"></div>
+  <!-- Animated Gradient Background -->
+  <div class="gradient-bg"></div>
+  <div class="hearts-bg"></div>
 
-    <!-- Game -->
-    <main id="game-wrapper">
-      <div id="game-container"></div>
-      
-      <!-- Touch Controls -->
-      <div id="controls">
-        <div class="d-btn" id="btn-left">⬅️</div>
-        <div class="d-btn" id="btn-right">➡️</div>
-        <div class="d-btn" id="btn-up">⬆️ Saltar</div>
-      </div>
-    </main>
+  <!-- Game -->
+  <main id="game-wrapper">
+    <div id="game-container"></div>
 
-    <!-- Title Screen -->
-    <section id="title-screen" style="display: none;">
-      <div class="title-card">
-        <span class="tag">💝 Para Anita</span>
-        <h1>Feliz San Valentín ✨</h1>
+    <!-- Touch Controls -->
+    <div id="controls">
+      <button class="d-btn" id="btn-left">⬅️</button>
+      <button class="d-btn" id="btn-right">➡️</button>
+      <button class="d-btn primary" id="btn-up">⬆️ Saltar</button>
+    </div>
+  </main>
 
-        <p class="subtitle">
-          Hice este pequeño juego<br />
-          para guardar algunos recuerdos<br />
-          que significan mucho para mí 💕
-        </p>
+  <!-- Title Screen -->
+  <section id="title-screen">
+    <div class="title-card">
+      <span class="tag">💝 Para Anita</span>
+      <h1>Feliz San Valentín ✨</h1>
 
-        <button id="start-btn">
+      <p class="subtitle">
+        Hice este pequeño juego para guardar<br />
+        algunos recuerdos bonitos juntos 💖
+      </p>
+
+      <div class="btn-group">
+        <button id="start-btn" class="primary-btn">
           Comenzar ✨
         </button>
 
-        <p class="hint">
-          Salta y llega a la meta 💫
-        </p>
+        <button id="memories-btn" class="secondary-btn">
+          Recuerdos 📸
+        </button>
       </div>
-    </section>
 
-    <!-- Message Overlay -->
-    <section id="message-overlay" class="hidden">
-      <div class="message-box">
-        <img id="message-image" class="hidden" src="" alt="Recuerdo" />
-        <p id="message-text"></p>
-        <button id="close-btn">Guardar recuerdo 💖</button>
-      </div>
-    </section>
-  </body>
+      <p class="hint">
+        Usa las flechas o toca la pantalla 💫
+      </p>
+    </div>
+  </section>
+
+  <!-- Message Overlay -->
+  <section id="message-overlay" class="hidden">
+    <div class="message-box">
+      <img id="message-image" class="hidden" src="" alt="Recuerdo" />
+      <p id="message-text"></p>
+      <button id="close-btn" class="primary-btn">
+        Guardar recuerdo 💖
+      </button>
+    </div>
+  </section>
+</body>
+
 </html>

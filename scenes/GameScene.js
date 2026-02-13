@@ -128,17 +128,15 @@ export class GameScene extends Phaser.Scene {
     this.animationManager.createAnimations();
 
     // Items
-    // Items (Simplified Layout)
+    // Items (7 Memories)
     const itemPositions = [
       { x: 400, y: 360, frame: 0 },
       { x: 800, y: 310, frame: 1 },
       { x: 1200, y: 360, frame: 2 },
       { x: 1600, y: 260, frame: 3 },
       { x: 2100, y: 360, frame: 0 },
-      { x: 2400, y: 210, frame: 1 }, // High path
-      { x: 2900, y: 360, frame: 2 },
-      { x: 3300, y: 310, frame: 3 },
-      { x: 3700, y: 360, frame: 0 },
+      { x: 2900, y: 360, frame: 1 }, // High path
+      { x: 3700, y: 360, frame: 2 },
     ];
     this.items = this.itemFactory.createItems(itemPositions);
 
@@ -328,11 +326,30 @@ export class GameScene extends Phaser.Scene {
     } catch (e) {}
 
     item.disableBody(true, true);
-    this.collectedCount++;
 
     const itemIndex = item.getData("messageKey");
-    // Cycle through 1, 2, 3
-    const photoIndex = (itemIndex % 3) + 1;
+
+    // Check if valid index (0-6)
+    if (itemIndex >= 0 && itemIndex <= 6) {
+      // Save to localStorage
+      const collected = JSON.parse(
+        localStorage.getItem("collectedMemories") || "[]",
+      );
+      if (!collected.includes(itemIndex)) {
+        collected.push(itemIndex);
+        localStorage.setItem("collectedMemories", JSON.stringify(collected));
+        this.collectedCount++; // Only increment if new? Or always? Game logic might depend on count for this session. Use session count for score, but persistence for memories.
+      }
+    }
+    this.collectedCount++; // Increment session count anyway
+
+    // Use itemIndex directly for photos (0-6)
+    // Assuming photos are named 1.png, 2.png... or 0.png?
+    // Let's assume 1-based naming from previous code (photoIndex % 3 + 1)
+    // If we have 7 photos, let's try 1-7 or 0-6.
+    // I will check the asset list output in a moment, but for now let's map 0-6 to 1-7 or similar.
+    // If assets/photos has names like "1.png", "2.png", I should map accordingly.
+    const photoIndex = itemIndex + 1; // 1 to 7
 
     this.showOverlay(null, false, photoIndex);
   }
