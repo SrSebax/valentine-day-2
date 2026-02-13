@@ -101,11 +101,13 @@ export class FinalScene extends Phaser.Scene {
 
         // Input to restart game
         this.input.keyboard.on('keydown-SPACE', () => {
-            this.scene.start('TitleScene');
+             this.game.sound.stopAll();
+            this.scene.start('IntroScene');
         });
 
         this.input.on('pointerdown', () => {
-            this.scene.start('TitleScene');
+             this.game.sound.stopAll();
+            this.scene.start('IntroScene');
         });
 
         // Play final music/sound if available

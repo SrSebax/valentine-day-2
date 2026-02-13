@@ -3,6 +3,16 @@ export class IntroScene extends Phaser.Scene {
         super({ key: 'IntroScene' });
     }
 
+    preload() {
+        this.load.image('background', 'assets/background.png');
+        this.load.audio('music', 'assets/music.mp3');
+        this.load.audio('collect', 'assets/collect.mp3');
+        this.load.spritesheet('player', 'assets/player2.png', { frameWidth: 256, frameHeight: 256 });
+        this.load.spritesheet('items', 'assets/items.png', { frameWidth: 512, frameHeight: 512 });
+        this.load.image('spike', 'assets/spikes.png');
+        this.load.spritesheet('angel', 'assets/angel.png', { frameWidth: 48, frameHeight: 64 });
+    }
+
     create() {
         const { width, height } = this.scale;
 
@@ -75,6 +85,13 @@ export class IntroScene extends Phaser.Scene {
     }
 
     startGame() {
+        // Start music if proper interaction happened and not playing
+        try {
+            if (!this.sound.get('music') || !this.sound.get('music').isPlaying) {
+                 this.sound.play('music', { loop: true, volume: 0.5 });
+            }
+        } catch (e) {}
+
         this.scene.start('GameScene');
     }
 }

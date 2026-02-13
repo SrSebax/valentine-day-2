@@ -7,13 +7,13 @@ import { physicsConfig } from './physicsConfig.js';
 export const gameConfig = {
     type: Phaser.AUTO,
     scale: {
-        mode: Phaser.Scale.FIT,
+        mode: Phaser.Scale.RESIZE,
         autoCenter: Phaser.Scale.CENTER_BOTH,
-        width: 800,
-        height: 600
+        width: '100%',
+        height: '100%'
     },
     parent: 'game-container',
     physics: physicsConfig,
     backgroundColor: '#fff0f5',
-    scene: [TitleScene, IntroScene, GameScene, FinalScene]
+    scene: [IntroScene, GameScene, FinalScene, TitleScene]
 };

@@ -11,12 +11,14 @@ export class TitleScene extends Phaser.Scene {
     }
 
     create() {
+        const width = this.scale.width;
+        const height = this.scale.height;
         // Simple background
-        this.add.rectangle(400, 300, 800, 600, 0xfff0f5);
+        this.add.rectangle(width/2, height/2, width, height, 0xfff0f5);
         try {
-            const bg = this.add.image(400, 300, 'background');
-            const scaleX = 800 / bg.width;
-            const scaleY = 600 / bg.height;
+            const bg = this.add.image(width/2, height/2, 'background');
+            const scaleX = width / bg.width;
+            const scaleY = height / bg.height;
             const scale = Math.max(scaleX, scaleY);
             bg.setScale(scale).setAlpha(0.5);
         } catch (e) {
@@ -24,8 +26,16 @@ export class TitleScene extends Phaser.Scene {
         }
 
         // Handle HTML overlay button
+        // Handle HTML overlay button
         const startBtn = document.getElementById('start-btn');
         const titleScreen = document.getElementById('title-screen');
+
+        if (titleScreen) {
+            titleScreen.style.display = 'flex';
+            setTimeout(() => {
+                titleScreen.style.opacity = '1';
+            }, 50);
+        }
 
         if (startBtn) {
             // Remove old listeners to prevent duplicates if scene restarts
